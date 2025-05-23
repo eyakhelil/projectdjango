@@ -16,7 +16,7 @@ class Entity(models.Model):
 
     def __str__(self):
         return self.name
-
+    
 
 # Définition des champs pour chaque entité
 class FieldDefinition(models.Model):
@@ -46,11 +46,3 @@ class IntegrationLog(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     success = models.BooleanField(default=True)
     message = models.TextField()
-
-class FieldMapping(models.Model):
-    django_field = models.CharField(max_length=100)
-    lowcode_field = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.django_field} → {self.lowcode_field}"
