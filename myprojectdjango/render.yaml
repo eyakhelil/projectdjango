@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: projectdjango
+    env: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn myprojectdjango.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: myprojectdjango.settings
+      - key: PYTHON_VERSION
+        value: 3.10

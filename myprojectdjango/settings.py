@@ -26,6 +26,10 @@ SECRET_KEY = 'django-insecure-2bdf7bilck)a1=^1@mu=p7+7lm4skq8g+zvc3d1#sd#-g_c0mn
 DEBUG = True
 
 import os
+import dj_database_url
+
+DEBUG = os.environ.get("DEBUG", "False") == "True"
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(" ")
 
 ALLOWED_HOSTS = [
     '.onrender.com',
@@ -58,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'myprojectdjango.urls'
@@ -77,7 +82,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'gunicorn myprojectdjango.wsgi:application'
+WSGI_APPLICATION = 'myprojectdjango.wsgi:application'
 
 
 # Database
@@ -87,7 +92,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+                }
 }
 
 
