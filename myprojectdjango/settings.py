@@ -27,8 +27,11 @@ DEBUG = True
 
 import os
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = [
+    '.onrender.com',
+    'localhost',  # utile pour test local
+    '127.0.0.1',
+]
 
 # Application definition
 
@@ -74,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'myprojectdjango.wsgi.application'
+WSGI_APPLICATION = 'gunicorn myprojectdjango.wsgi:application'
 
 
 # Database
@@ -144,4 +147,8 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
+
+DEBUG = False
+ALLOWED_HOSTS = ['your-service-name.onrender.com']
